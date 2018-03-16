@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Path to your service credentials json file.
-CREDENTIAL_SERVICE = "credentials/credentials_service.json"
+CREDENTIAL_SERVICE = "credentials/service_account.json"
 
 # Your default scopes for GAE. Currently only BQ and GSC
 DEFAULT_SCOPES = ["https://www.googleapis.com/auth/bigquery", "https://www.googleapis.com/auth/webmasters.readonly"]
@@ -10,7 +10,7 @@ DEFAULT_SCOPES = ["https://www.googleapis.com/auth/bigquery", "https://www.googl
 DATASET_ID = 'gsc_logger_sites'
 
 # Since GCS data is dated, specify the offset from today.
-OFFSET_DATE = 7
+OFFSET_DATE = 4
 
 # Should we auto remove DBs if we no longer have access.
 # Careful:  Could lose data if you accidentally lose connection.
@@ -36,33 +36,23 @@ TABLE_FRIENDLY_FRONT = "GSC Logger:"
 STREAM_RETRIES = 5
 
 # Whether the /cron/ path can be called publicly from the web. Should be False after testing.
-ALLOW_OPEN_CRON = True
+ALLOW_OPEN_CRON = False
 
 # Hides Homepage data if true.
-HIDE_HOMEPAGE = False
+HIDE_HOMEPAGE = True
 
 # Set Timezone ('US/Eastern', 'US/Central', 'US/Pacific')
-GSC_TIMEZONE = 'US/Eastern'
+GSC_TIMEZONE = 'Asia/Tokyo'
 
 # Base query for GSC.  startDate and endDate are replaced upon call.
 GSC_QUERY = {
-                 "startDate": "2017-07-01",
-                 "endDate": "2017-07-31",
+                 "startDate": "2018-02-01",
+                 "endDate": "2018-02-28",
                  "dimensions": [
                   "query",
                   "date",
                   "page",
                   "device"
-                 ],
-                 "dimensionFilterGroups": [
-                  {
-                   "filters": [
-                    {
-                     "dimension": "country",
-                     "expression": "usa"
-                    }
-                   ]
-                  }
                  ],
                  "rowLimit": 5000
                 }
